@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Partners Slider</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,300&family=Playfair+Display:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --border: #e8e6e1;
+      --border-hover: #c8c4bc;
+      --text: #1a1a18;
+      --text-muted: #9a9690;
+      --accent: #2a6b4f;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.1), 0 16px 40px rgba(0,0,0,0.06);
+    }
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    .partners-section { width: 100%; padding: 20px 0; }
+    .slider-track-wrapper {
+      width: 100%; overflow: hidden;
+      position: relative; padding: 10px 0;
+    }
+    .slider-track-wrapper::before,
+    .slider-track-wrapper::after {
+      content: ''; position: absolute; top: 0; bottom: 0;
+      width: 160px; z-index: 2; pointer-events: none;
+    }
+    .slider-track-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg), transparent);
+    }
+    .slider-track-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg), transparent);
+    }
+    .slider-track {
+      display: flex; width: max-content;
+      animation: marquee 36s linear infinite;
+    }
+    .slider-track.rev {
+      animation-name: marquee-rev;
+      animation-duration: 46s;
+      animation-delay: -10s;
+    }
+    .slider-track:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes marquee-rev {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+    .logo-card {
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 14px; padding: 20px 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      min-width: 230px; height: 110px;
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+      transition: box-shadow 0.35s, border-color 0.35s, transform 0.35s;
+      cursor: default;
+    }
+    .logo-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+    .logo-card img {
+      height: 64px;
+      max-width: 170px;
+      object-fit: contain;
+      opacity: 1;
+      filter: none;
+      display: block;
+    }
+    .logo-fallback {
+      font-size: 0.85rem; font-weight: 700;
+      color: #aaa; letter-spacing: 0.05em;
+      text-align: center; padding: 0 8px;
+      display: none;
+    }
+    .row-gap { height: 18px; }
+
+    @media (max-width: 600px) {
+      .stats-strip { gap: 20px; padding: 20px; flex-wrap: wrap; }
+      .stat-divider { display: none; }
+      .logo-card { min-width: 170px; padding: 16px 24px; height: 90px; }
+      .logo-card img { height: 50px; max-width: 130px; }
+    }
+  </style>
+</head>
+<body>
+<section class="partners-section">
+  <div class="slider-track-wrapper">
+    <div class="slider-track" id="row1"></div>
+  </div>
+  <div class="row-gap"></div>
+  <div class="slider-track-wrapper">
+    <div class="slider-track rev" id="row2"></div>
+  </div>
+
+
+</section>
+
+<script>
+  const row1logos = [
+    { url: "https://luxurylifestyleawards.com/wp-content/uploads/2021/03/Logo_BR_MALDIVES_hor_RGB_black_2.jpg", name: "BR Maldives" },
+    { url: "https://transmaldivian.com/wp-content/uploads/2019/07/reethi_rah_maldives_logo.png", name: "Reethi Rah" },
+    { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/ITC_Limited_Logo.svg/250px-ITC_Limited_Logo.svg.png", name: "ITC" },
+    { url: "https://www.straphael.com/images/st-raphael-limassol-red-big.png", name: "St Raphael" },
+    { url: "https://enqafm7df2v.exactdn.com/wp-content/uploads/2024/02/Asset-1xxhdpi.png?strip=all&lossy=1&ssl=1", name: "Partner" },
+    { url: "https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Dabur_Logo.svg/500px-Dabur_Logo.svg.png", name: "Dabur" },
+    { url: "https://upload.wikimedia.org/wikipedia/commons/2/24/Emblem_of_Mumbai.png", name: "Mumbai" },
+    { url: "https://static.wixstatic.com/media/9b42e8_4964d75b19e1433c9a196095f6f2207a~mv2.png/v1/fill/w_568,h_402,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/9b42e8_4964d75b19e1433c9a196095f6f2207a~mv2.png", name: "Partner" },
+    { url: "https://destinationdeluxe.com/wp-content/uploads/2021/05/Amilla-Maldives-Resort-and-Residences.jpg", name: "Amilla Maldives" },
+    { url: "https://ele-na.com/wp-content/uploads/2023/11/ztdI5zBDBnIrCitGYHUV.webp", name: "Ele-Na" },
+    { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/WaldorfLogo.svg/330px-WaldorfLogo.svg.png", name: "Waldorf" },
+  ];
+
+  const row2logos = [
+    { url: "https://transmaldivian.com/wp-content/uploads/2019/07/reethi_rah_maldives_logo.png", name: "Reethi Rah" },
+    { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Taj_Hotels_logo.svg/250px-Taj_Hotels_logo.svg.png", name: "Taj Hotels" },
+    { url: "https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Wadia_Group_logo.svg/500px-Wadia_Group_logo.svg.png", name: "Wadia Group" },
+    { url: "https://consent.trustarc.com/get?name=SS_BRAND_standard_logo.png", name: "TrustArc" },
+    { url: "https://1000logos.net/wp-content/uploads/2016/12/Goldman-Sachs-Logo.png", name: "Goldman Sachs" },
+    { url: "https://www.jufahotels.com/wp-content/uploads/2024/02/logo-full-yellow.svg", name: "Jufa Hotels" },
+    { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/GMR_Group_%28logo%29.svg/1200px-GMR_Group_%28logo%29.svg.png", name: "GMR Group" },
+    { url: "https://upload.wikimedia.org/wikipedia/en/1/13/Mumbai_Police_logo.png", name: "Mumbai Police" },
+    { url: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/500px-Punjab_Kings_Logo.svg.png", name: "Punjab Kings" },
+    { url: "https://luxurylifestyleawards.com/wp-content/uploads/2021/03/Logo_BR_MALDIVES_hor_RGB_black_2.jpg", name: "BR Maldives" },
+  ];
+
+  function buildCard({ url, name }) {
+    const card = document.createElement('div');
+    card.className = 'logo-card';
+
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = name;
+
+    const fallback = document.createElement('span');
+    fallback.className = 'logo-fallback';
+    fallback.textContent = name;
+
+    img.onerror = function() {
+      this.style.display = 'none';
+      fallback.style.display = 'block';
+      console.warn('Logo failed to load (hotlink protected):', url);
+    };
+
+    card.appendChild(img);
+    card.appendChild(fallback);
+    return card;
+  }
+
+  function populateRow(id, logos) {
+    const row = document.getElementById(id);
+    [...logos, ...logos].forEach(logo => row.appendChild(buildCard(logo)));
+  }
+
+  populateRow('row1', row1logos);
+  populateRow('row2', row2logos);
+</script>
+</body>
+</html>
